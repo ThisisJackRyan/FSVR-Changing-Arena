@@ -2,12 +2,10 @@ import json
 import time
 import subprocess
 from tkinter import *
-import ctypes
 
 
-#filepath = "C:\Program Files\Vertigo Arcades\Haze\Haze\config.txt"
 config_path = r"C:\Program Files\Vertigo Arcades\Haze\Haze\config.txt"
-#filepath = r"C:\Users\Jack Ryan\Desktop\config.txt.backup"
+
 
 
 root = Tk()
@@ -22,11 +20,9 @@ def openTkinter():
 
 
 def ChangeLoc():
-    
-
     root.destroy()
     # Terminate the running application by name
-    subprocess.run(['taskkill', '/IM', 'Haze.exe', '/F'])
+    subprocess.run(['taskkill', '/IM', 'Haze.exe', '/F'], stdout=subprocess.DEVNULL, stderr=subprocess.STDOUT)
     
     
     time.sleep(2)
@@ -47,7 +43,7 @@ def ChangeLoc():
         array = txt['PlaySpaces'][loc]["machineGuids"]
         array2 = txt['PlaySpaces'][loc]["sessions"][0]["participants"]
 
-        print()
+        #print()
 
         txt["PlaySpaces"][other]["machineGuids"] = array
         txt["PlaySpaces"][loc]["machineGuids"] = []
@@ -57,18 +53,22 @@ def ChangeLoc():
 
         with open(config_path, "w", encoding="utf-8") as file:
             file.write(json.dumps(txt, indent=4))
-        print("Successfully switched PlaySpaces...")
+        #print("Successfully switched PlaySpaces...")
        
         time.sleep(2)
     except:
-        print("hmmm Something went wrong...")
+        #print("hmmm Something went wrong...")
         time.sleep(2)
     
     
     # Wait for a few seconds
-    print("Opening Haze...")
-    time.sleep(5)
-    subprocess.Popen(['C:\\Program Files\\Vertigo Arcades\\Haze\\Haze\\Haze.exe'])
+    try:
+        #print("Opening Haze...")
+        time.sleep(5)
+        subprocess.Popen(['C:\\Program Files\\Vertigo Arcades\\Haze\\Haze\\Haze.exe'])
+    except:
+        pass
+        #print("Haze is already open")
 
             
  
@@ -76,6 +76,16 @@ def ChangeLoc():
 
 openTkinter()
 root.mainloop() 
+
+#to make this a .exe file 
+#first:
+#   pip install pyinstaller
+#Second:
+#   then cd into the folder
+#Third:
+#   pyinstaller --onefile main.py
+#Last:
+#   follow instructions on how to make it run as admin: https://www.itpro.com/software/367829/how-to-make-programs-always-run-as-admin-on-windows
     
 
 
