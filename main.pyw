@@ -77,13 +77,16 @@ def ChangeLoc():
 openTkinter()
 root.mainloop() 
 
+
+
 #to make this a .exe file 
+    #CHECK PATHING SO WE DONT BRAEK IT AND TEST WITH PRINTS BEFORE TURNIGN INTO .EXE FILE!!!!!!!
 #first:
 #   pip install pyinstaller
 #Second:
 #   then cd into the folder
 #Third:
-#   pyinstaller --onefile main.py
+#   pyinstaller --onefile main.pyw
 #Last:
 #   follow instructions on how to make it run as admin: https://www.itpro.com/software/367829/how-to-make-programs-always-run-as-admin-on-windows
     
