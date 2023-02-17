@@ -2,6 +2,7 @@ import json
 import time
 import subprocess
 from tkinter import *
+import ctypes
 
 
 #filepath = "C:\Program Files\Vertigo Arcades\Haze\Haze\config.txt"
@@ -12,11 +13,6 @@ config_path = r"C:\Program Files\Vertigo Arcades\Haze\Haze\config.txt"
 root = Tk()
 root.geometry("400x300")
 
-
-
-
-
-
 def openTkinter():
     infoText = Label(root, text="Please press the Button to switch all players to other arena")
     infoText.pack()
@@ -24,7 +20,9 @@ def openTkinter():
     button.pack()
 
 
+
 def ChangeLoc():
+    
 
     root.destroy()
     # Terminate the running application by name
@@ -57,10 +55,10 @@ def ChangeLoc():
         txt["PlaySpaces"][other]["sessions"][0]["participants"] = array2
         txt["PlaySpaces"][loc]["sessions"][0]["participants"] = []
 
-        
         with open(config_path, "w", encoding="utf-8") as file:
             file.write(json.dumps(txt, indent=4))
         print("Successfully switched PlaySpaces...")
+       
         time.sleep(2)
     except:
         print("hmmm Something went wrong...")
@@ -70,7 +68,7 @@ def ChangeLoc():
     # Wait for a few seconds
     print("Opening Haze...")
     time.sleep(5)
-    process = subprocess.Popen(['C:\\Program Files\\Vertigo Arcades\\Haze\\Haze\\Haze.exe'])
+    subprocess.Popen(['C:\\Program Files\\Vertigo Arcades\\Haze\\Haze\\Haze.exe'])
 
             
  
